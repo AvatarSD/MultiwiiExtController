@@ -14,6 +14,22 @@ public:
         _data = data;
     }
 
+    int getVal()
+    {
+        return _data;
+    }
+
+    std::string getName()
+    {
+        _name[3] = 0;
+        return std::string(_name);
+    }
+    const char * getName_c()
+    {
+        _name[3] = 0;
+        return _name;
+    }
+
 
 private:
     char _name[4];
@@ -26,7 +42,7 @@ public:
     Sonars();
 
 private:
-    virtual void incomingData(SonarsData data);
+    virtual void incomingData(const SonarsData & data);
     void read(const char * inData, int byteToRead);
 };
 

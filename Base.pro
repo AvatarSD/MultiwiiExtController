@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     BoostSerialPort/BSerialPort.cpp \
     basestationiface.cpp \
     Joystick/JoystickAdv/joystickadv.cpp \
-    sonars.cpp
+    sonars.cpp \
+    sonarsroutine.cpp
 
 HEADERS  += mainwindow.h \
     basestationcore.h \
@@ -34,7 +35,8 @@ HEADERS  += mainwindow.h \
     mwtypes.h \
     Joystick/JoystickAdv/joystickadv.h \
     Joystick/JoystickAdv/joytypes.h \
-    sonars.h
+    sonars.h \
+    sonarsroutine.h
 
 FORMS    += mainwindow.ui
 

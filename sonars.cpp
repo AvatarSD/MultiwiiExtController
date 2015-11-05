@@ -2,70 +2,59 @@
 
 #define BUFF_LEN 32
 
+#define $BYTE               0
+#define START_NAME_BYTE     1
+#define START_DATA_BYTE     4
+#define Checksum_byte       6
+
 Sonars::Sonars() : BSerialPort(BUFF_LEN)
 {
 
 }
 
-void Sonars::incomingData(SonarsData data)
+void Sonars::incomingData(const SonarsData &data)
 {
 
 }
 
 void Sonars::read(const char * inData, int byteToRead)
 {
-    /*inputs*/
-    unsigned char * inData = (unsigned char *)data;
-
     /*outputs*/
-    static char OutReadingByte = 0;
-    static short int CmdCRC, CalcCRC;
+    static char OutReadingByte = 0, buf[4];
+    static unsigned char CalcCRC = '$';
+    static short unsigned int data = 0;
 
     for(int InputReadingByte = 0; InputReadingByte<byteToRead; InputReadingByte++)
     {
-        if(OutReadingByte==0) memset(joydata, 0, sizeof(JoyData));
+        if(OutReadingByte == $BYTE) memset(buf, 0, 4);
 
         //detect some inportant for us data(number bytes in arrived command)
-        switch (OutReadingByte)
+
+        if(OutReadingByte == $BYTE)
+            OutReadingByte++;
+        else if((OutReadingByte >= START_NAME_BYTE)&&(OutReadingByte < START_DATA_BYTE))
         {
-        case $55Byte:
-            if(inData[InputReadingByte] != 0x55) OutReadingByte = 0; else OutReadingByte++;
-            break;
-
-        case $FCByte:
-            if(inData[InputReadingByte] != 0xFC) OutReadingByte = 0; else OutReadingByte++;
-            break;
-
-        case MSB_CH4_byte:
-            CalcCRC = 0;
-            CalcCRC += inData[InputReadingByte];
+            buf[OutReadingByte-START_NAME_BYTE] = inData[InputReadingByte];
             OutReadingByte++;
-            break;
-
-        case LSB_CH4_byte:
-            CalcCRC += inData[InputReadingByte];
+        }
+        else if((OutReadingByte >= START_DATA_BYTE)&&(OutReadingByte < Checksum_byte))
+        {
+            ((unsigned char*)(&data))[OutReadingByte-START_DATA_BYTE] = inData[InputReadingByte];
             OutReadingByte++;
-            break;
-
-        case MSB_Checksum_byte:
-            CmdCRC = 0;
-            CmdCRC += (unsigned short int)(inData[InputReadingByte] << 8 );
-            OutReadingByte++;
-            break;
-
-        case LSB_Checksum_byte:
-            CmdCRC += inData[InputReadingByte];
-            for(unsigned char i = 0; i < sizeof(JoyData); i++) CalcCRC += ((unsigned char*)joydata)[i];
-            if(CmdCRC == CalcCRC)
-                emit dataRsv(joydata);
+        }
+        if(OutReadingByte >= Checksum_byte)
+        {
+            //CmdCRC = inData[InputReadingByte];
             OutReadingByte = 0;
-            break;
-
-        default:
-            ((char*)joydata)[dataByte-(OutReadingByte-StartData_byte)] = inData[InputReadingByte];
-            OutReadingByte++;
-            break;
-
+            for(int i = 0; i < 3; i++)
+                CalcCRC ^= buf[i];
+            for(int i = 0; i < 2; i++)
+                CalcCRC ^= ((unsigned char*)(&data))[i];
+            if(CalcCRC == inData[InputReadingByte])
+            {
+                SonarsData sonarData(buf, data);
+                incomingData(SonarsData(buf, sonarData));
+            }
         }
     }
 }

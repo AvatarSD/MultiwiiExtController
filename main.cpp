@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "basestationiface.h"
 #include "basestationcore.h"
+#include "sonarsroutine.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,6 +23,13 @@ int main(int argc, char *argv[])
     //Убрать!
     QObject::connect(&w, SIGNAL(Connect(int*,QString,int)),CopterIface, SLOT(Connect(int*,QString,int)));
     QObject::connect(&w, SIGNAL(DisconnSig()),CopterIface,SLOT(Disconnect()));
+
+
+    //Sonars Test
+    SonarsRoutine sonars;
+    QObject::connect(&sonars, SIGNAL(incomingDataRsv(const SonarsData &)),
+                     &w, SLOT(showSnarsData(const SonarsData &)));
+    sonars.connect(std::string("/dev/ttyUSB0"), 115200);
 
     w.show();
 

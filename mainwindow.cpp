@@ -96,3 +96,9 @@ void MainWindow::showDisconnectedJoy(QString str)
     ui->statusBar->showMessage("Joy: " + str);
     ui->btnConnectJoy->setText("Connect");
 }
+
+void MainWindow::showSnarsData(const SonarsData & data)
+{
+if(data.getName() == "PD0")
+    ui->sonarBar->setValue(data.getVal());
+}

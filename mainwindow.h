@@ -5,6 +5,7 @@
 #include "mwtypes.h"
 #include "Joystick/JoystickAdv/joystickadv.h"
 #include <QString>
+#include "sonars.h"
 
 namespace Ui {
 class MainWindow;
@@ -32,6 +33,7 @@ public slots:
     void showDisconnected();
     void showJoy(JoyData * joydata);
     void showDisconnectedJoy(QString str);
+    void showSnarsData(const SonarsData & data);
 
 private slots:
     void on_btnConnect_clicked();

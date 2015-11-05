@@ -15,10 +15,13 @@ Byte [2-15]: Payload, Potmeter values.
 Byte [16,17]: Checksum. All bytes of payload added up, MSB first.
 */
 
-#define $BYTE               0
-#define START_NAME_BYTE     1
-#define START_DATA_BYTE     4
-#define Checksum_byte       6
+#define $55Byte             0
+#define $FCByte             1
+#define StartData_byte      2
+#define MSB_CH4_byte        14
+#define LSB_CH4_byte        15
+#define MSB_Checksum_byte   16
+#define LSB_Checksum_byte   17
 
 #define dataByte 11
 
