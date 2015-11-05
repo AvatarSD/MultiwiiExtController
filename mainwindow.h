@@ -33,7 +33,7 @@ public slots:
     void showDisconnected();
     void showJoy(JoyData * joydata);
     void showDisconnectedJoy(QString str);
-    void showSnarsData(const SonarsData & data);
+    void showSonarsData(const SonarsData *data);
 
 private slots:
     void on_btnConnect_clicked();

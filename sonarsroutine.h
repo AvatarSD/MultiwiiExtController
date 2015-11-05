@@ -11,7 +11,7 @@ public:
     explicit SonarsRoutine(QObject *parent = 0);
 
 signals:
-    void incomingDataRsv(const SonarsData & data);
+    void incomingDataRsv(const SonarsData * data);
 
 private:
     void incomingData(const SonarsData & data);

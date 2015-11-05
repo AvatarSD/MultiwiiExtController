@@ -29,9 +29,10 @@ void Sonars::read(const char * inData, int byteToRead)
         if(OutReadingByte == $BYTE) memset(buf, 0, 4);
 
         //detect some inportant for us data(number bytes in arrived command)
-
         if(OutReadingByte == $BYTE)
-            OutReadingByte++;
+        {
+            if(inData[InputReadingByte] != '$') OutReadingByte = 0; else OutReadingByte++;
+        }
         else if((OutReadingByte >= START_NAME_BYTE)&&(OutReadingByte < START_DATA_BYTE))
         {
             buf[OutReadingByte-START_NAME_BYTE] = inData[InputReadingByte];
@@ -50,10 +51,10 @@ void Sonars::read(const char * inData, int byteToRead)
                 CalcCRC ^= buf[i];
             for(int i = 0; i < 2; i++)
                 CalcCRC ^= ((unsigned char*)(&data))[i];
-            if(CalcCRC == inData[InputReadingByte])
+           // if(CalcCRC == inData[InputReadingByte])
             {
                 SonarsData sonarData(buf, data);
-                incomingData(SonarsData(buf, sonarData));
+                incomingData(sonarData);
             }
         }
     }

@@ -7,7 +7,7 @@ MainWindow::MainWindow(JoystickAdv * joy, QWidget *parent) : QMainWindow(parent)
     ui->setupUi(this);
     ConnectionStatus = 0;
     ui->statusBar->showMessage("by S.D.");
-//    _joy = new JoystickAdv();
+
     QObject::connect(_joy, SIGNAL(dataRsv(JoyData*)), this, SLOT(showJoy(JoyData*)));
     QObject::connect(_joy, SIGNAL(disconnected(QString)), this, SLOT(showDisconnectedJoy(QString)));
 }
@@ -97,8 +97,13 @@ void MainWindow::showDisconnectedJoy(QString str)
     ui->btnConnectJoy->setText("Connect");
 }
 
-void MainWindow::showSnarsData(const SonarsData & data)
+void MainWindow::showSonarsData(const SonarsData * data)
 {
-if(data.getName() == "PD0")
-    ui->sonarBar->setValue(data.getVal());
+//if(data.getName() == "PD0")
+    ui->sonarBar->setValue(data->getVal());
+    /*
+    static int i = 0;
+    ui->sonarBar->setValue(i++);
+    if (i == 4000) i = 0;
+    */
 }

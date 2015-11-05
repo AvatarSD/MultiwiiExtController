@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
 
     //Sonars Test
     SonarsRoutine sonars;
-    QObject::connect(&sonars, SIGNAL(incomingDataRsv(const SonarsData &)),
-                     &w, SLOT(showSnarsData(const SonarsData &)));
-    sonars.connect(std::string("/dev/ttyUSB0"), 115200);
+    QObject::connect(&sonars, SIGNAL(incomingDataRsv(const SonarsData *)),
+                     &w, SLOT(showSonarsData(const SonarsData *)));
+    sonars.BSerialPort::connect("/dev/ttyUSB0");
 
     w.show();
 

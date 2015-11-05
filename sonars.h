@@ -14,19 +14,19 @@ public:
         _data = data;
     }
 
-    int getVal()
+    int getVal() const
     {
         return _data;
     }
 
-    std::string getName()
+    const std::string getName() const
     {
-        _name[3] = 0;
+        //_name[3] = 0;
         return std::string(_name);
     }
-    const char * getName_c()
+    const char * getName_c() const
     {
-        _name[3] = 0;
+        //_name[3] = 0;
         return _name;
     }
 
