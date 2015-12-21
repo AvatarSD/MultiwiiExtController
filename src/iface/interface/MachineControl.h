@@ -18,9 +18,7 @@ public:
 	virtual ~MachineControl();
 
 	void setMove(const ControlData& controldata); // Range: -1000...+1000
-	//void setDiff(const ControlData& diffcontroldata);
 
-	//bool zeroingAfterMove;
 	void registerControlPoint(std::string name, ControlData& correctiondata);
 	void unRegisterControlPoint(std::string name);
 

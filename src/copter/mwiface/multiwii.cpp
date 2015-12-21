@@ -1,4 +1,5 @@
-#include "multiwii.h"
+#include "../copter/mwiface/multiwii.h"
+
 #include "stdio.h"
 
 #define MSP_IDENT               100 //коды сообщений с мультивишки

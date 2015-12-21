@@ -10,7 +10,7 @@
 
 #include "../iface/MachineControl.h"
 #include "../iface/types/angle.h"
-#include "../mwiface/multiwii.h"
+#include "mwiface/multiwii.h"
 
 class Copter: public MachineControl, public MultiWii
 {

@@ -10,7 +10,8 @@
 
 #include "basestreamer.h"
 #include <boost/signals2.hpp>
-#include "../mwiface/mwtypes.h"
+
+#include "../copter/mwiface/mwtypes.h"
 
 class BaseStreamerRouter : public BaseStreamer
 {

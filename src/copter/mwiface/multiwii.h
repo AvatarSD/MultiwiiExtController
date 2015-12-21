@@ -5,12 +5,12 @@
  *      Author: sd
  */
 
-#ifndef MWIFACE_MULTIWII_H_
-#define MWIFACE_MULTIWII_H_
+#ifndef COPTER_MWIFACE_MULTIWII_H_
+#define COPTER_MWIFACE_MULTIWII_H_
 
 #include <boost/signals2.hpp>
 #include "../BoostSerialPort/BSerialPort.h"
-#include "mwtypes.h"
+#include "../copter/mwiface/mwtypes.h"
 
 class MultiWii : public BSerialPort
 {
@@ -58,4 +58,4 @@ private:
 };
 
 
-#endif /* MWIFACE_MULTIWII_H_ */
+#endif /* COPTER_MWIFACE_MULTIWII_H_ */
