@@ -5,8 +5,8 @@
  *      Author: sd
  */
 
-#ifndef IFACE_TYPES_TYPECONTROLDATA_H_
-#define IFACE_TYPES_TYPECONTROLDATA_H_
+#ifndef IFACE_TYPES_CONTROL_H_
+#define IFACE_TYPES_CONTROL_H_
 
 
 class ControlData
@@ -29,4 +29,4 @@ public:
 };
 
 
-#endif /* IFACE_TYPES_TYPECONTROLDATA_H_ */
+#endif /* IFACE_TYPES_CONTROL_H_ */

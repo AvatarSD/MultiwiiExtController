@@ -4,7 +4,7 @@
  *  Created on: 19 лип. 2015
  *      Author: sd
  */
-#include "typeControlData.h"
+#include "control.h"
 
 ControlData::ControlData(): x(0), y(0), z(0), oZ(0) {}
 
