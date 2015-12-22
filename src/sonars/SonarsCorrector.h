@@ -10,7 +10,7 @@
 
 #include "../pid/PID.h"
 
-class SonarsCorrector: public PID
+class SonarsCorrector
 {
 public:
 	SonarsCorrector();

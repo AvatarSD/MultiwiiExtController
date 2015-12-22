@@ -1,4 +1,4 @@
-#include "../copter/mwiface/multiwii.h"
+#include "multiwii.h"
 
 #include "stdio.h"
 

@@ -9,8 +9,8 @@
 #define COPTER_MWIFACE_MULTIWII_H_
 
 #include <boost/signals2.hpp>
-#include "../BoostSerialPort/BSerialPort.h"
-#include "../copter/mwiface/mwtypes.h"
+#include "../../BoostSerialPort/BSerialPort.h"
+#include "mwtypes.h"
 
 class MultiWii : public BSerialPort
 {

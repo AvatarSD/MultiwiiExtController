@@ -8,7 +8,7 @@
 #ifndef COPTER_COPTER_H_
 #define COPTER_COPTER_H_
 
-#include "../iface/MachineControl.h"
+#include "../iface/interface/MachineControl.h"
 #include "../iface/types/angle.h"
 #include "mwiface/multiwii.h"
 

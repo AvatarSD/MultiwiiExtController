@@ -1,7 +1,7 @@
 #ifndef SONARS_H
 #define SONARS_H
 
-#include "../BoostSerialPort/BSerialPort.h"
+#include "../../BoostSerialPort/BSerialPort.h"
 
 class SonarData
 {
