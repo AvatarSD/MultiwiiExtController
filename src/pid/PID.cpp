@@ -2,6 +2,8 @@
  * Arduino PID Library - Version 1.1.1
  * by Brett Beauregard <br3ttb@gmail.com> brettbeauregard.com
  *
+ * Rewrote for linux by S.D. sd1995@ukr.net
+ *
  * This Library is licensed under a GPLv3 License
  **********************************************************************************************/
 
@@ -156,6 +158,11 @@ PID::Direction PID::getDirection()
 bool PID::isLimitsON()
 {
 	return _limitEnable;
+}
+
+double PID::getIntegetPart()
+{
+	return _ITerm;
 }
 
 /*

@@ -21,8 +21,7 @@ public:
 	void setOutputLimits(double min, double max);
 	void setTunings(double Kp, double Ki, double Kd);
 	void setDirection(Direction direction);
-
-	//Display functions ****************************************************************
+	double getIntegetPart();
 	double getKp();			// These functions query the pid for interal values.
 	double getKi();			//  they were created mainly for the pid front-end,
 	double getKd();			// where it's important to know what is actually
