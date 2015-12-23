@@ -15,9 +15,10 @@
  ***************************************************************************/
 PID::PID(double & input, double & output, double & setpoint, double Kp,
 		double Ki, double Kd, Direction ControllerDirection) :
-		_controllerDirection(ControllerDirection), _kp(Kp), _ki(Ki), _kd(Kd),
-		_input(&input), _output(&output), _setPoint(&setpoint)
+		_kp(Kp), _ki(Ki), _kd(Kd), _input(&input), _output(&output),
+		_setPoint(&setpoint)
 {
+	_controllerDirection = ControllerDirection;
 
 	_ITerm = 0;
 	_outMin = 0;
@@ -89,19 +90,6 @@ void PID::setTunings(double Kp, double Ki, double Kd)
 	setDirection(_controllerDirection);
 }
 
-/* SetSampleTime(...) *********************************************************
- * sets the period, in Milliseconds, at which the calculation is performed
- ******************************************************************************/
-//void PID::SetSampleTime(int NewSampleTime)
-//{
-//	if (NewSampleTime > 0)
-//	{
-//		double ratio = (double) NewSampleTime / (double) SampleTime;
-//		ki *= ratio;
-//		kd /= ratio;
-//		SampleTime = (unsigned long) NewSampleTime;
-//	}
-//}
 /* SetOutputLimits(...)****************************************************
  *     This function will be used far more often than SetInputLimits.  while
  *  the input to the controller will generally be in the 0-1023 range (which is
