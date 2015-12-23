@@ -15,7 +15,8 @@
  ***************************************************************************/
 PID::PID(double & input, double & output, double & setpoint, double Kp,
 		double Ki, double Kd, Direction ControllerDirection) :
-		_controllerDirection(ControllerDirection), _kp(Kp), _ki(Ki), _kd(Kd)
+		_controllerDirection(ControllerDirection), _kp(Kp), _ki(Ki), _kd(Kd),
+		_input(&input), _output(&output), _setPoint(&setpoint)
 {
 
 	_ITerm = 0;
@@ -23,10 +24,10 @@ PID::PID(double & input, double & output, double & setpoint, double Kp,
 	_outMax = 0;
 	_limitEnable = false;
 
-	SetControllerDirection(ControllerDirection);
-	SetTunings(Kp, Ki, Kd);
+	setDirection(ControllerDirection);
+	setTunings(Kp, Ki, Kd);
 
-	_lastTime = GetTimeStampMicros();							//-SampleTime;
+	_lastTime = getTimeStampMicros();							//-SampleTime;
 	_lastInput = input;
 }
 
@@ -36,11 +37,11 @@ PID::PID(double & input, double & output, double & setpoint, double Kp,
  *   pid Output needs to be computed.  returns true when the output is computed,
  *   false when nothing has been done.
  **********************************************************************************/
-void PID::Compute()
+void PID::compute()
 {
 	/*Snapshot*/
 	double input = *_input;
-	uint64_t timeNow = GetTimeStampMicros();
+	uint64_t timeNow = getTimeStampMicros();
 
 	/*Compute all the working error variables*/
 	uint64_t timeChange = timeNow - _lastTime;
@@ -76,7 +77,7 @@ void PID::Compute()
  * it's called automatically from the constructor, but tunings can also
  * be adjusted on the fly during normal operation
  ******************************************************************************/
-void PID::SetTunings(double Kp, double Ki, double Kd)
+void PID::setTunings(double Kp, double Ki, double Kd)
 {
 	if (Kp < 0 || Ki < 0 || Kd < 0)
 		return;
@@ -85,7 +86,7 @@ void PID::SetTunings(double Kp, double Ki, double Kd)
 	_ki = Ki;	// * SampleTimeInSec;
 	_kd = Kd;	// / SampleTimeInSec;
 
-	SetControllerDirection(_controllerDirection);
+	setDirection(_controllerDirection);
 }
 
 /* SetSampleTime(...) *********************************************************
@@ -109,7 +110,7 @@ void PID::SetTunings(double Kp, double Ki, double Kd)
  *  want to clamp it from 0-125.  who knows.  at any rate, that can all be done
  *  here.
  **************************************************************************/
-void PID::SetOutputLimits(double Min, double Max)
+void PID::setOutputLimits(double Min, double Max)
 {
 	_limitEnable = false;
 	if (Min >= Max)
@@ -126,7 +127,7 @@ void PID::SetOutputLimits(double Min, double Max)
  * know which one, because otherwise we may increase the output when we should
  * be decreasing.  This is called from the constructor.
  ******************************************************************************/
-void PID::SetControllerDirection(Direction direction)
+void PID::setDirection(Direction direction)
 {
 	if (direction == Direction::REVERSE)
 	{
@@ -138,36 +139,41 @@ void PID::SetControllerDirection(Direction direction)
 }
 
 /* Status Functions*************************************************************/
-double PID::GetKp()
+double PID::getKp()
 {
 	if (_controllerDirection == Direction::REVERSE)
 		return (0 - _kp);
 	return _kp;
 }
 
-double PID::GetKi()
+double PID::getKi()
 {
 	if (_controllerDirection == Direction::REVERSE)
 		return (0 - _ki);
 	return _ki;
 }
 
-double PID::GetKd()
+double PID::getKd()
 {
 	if (_controllerDirection == Direction::REVERSE)
 		return (0 - _kd);
 	return _kd;
 }
 
-PID::Direction PID::GetDirection()
+PID::Direction PID::getDirection()
 {
 	return _controllerDirection;
+}
+
+bool PID::isLimitsON()
+{
+	return _limitEnable;
 }
 
 /*
  * Time in microseconds
  */
-uint64_t PID::GetTimeStampMicros()
+uint64_t PID::getTimeStampMicros()
 {
 	struct timeval tv;
 	gettimeofday(&tv, 0);
