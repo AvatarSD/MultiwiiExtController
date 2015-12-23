@@ -9,7 +9,7 @@
 #define IFACE_MACHINECONTROL_H_
 
 #include "../types/control.h"
-#include <map>
+#include <list>
 
 class MachineControl
 {
@@ -19,11 +19,11 @@ public:
 
 	void setMove(const ControlData& controldata); // Range: -1000...+1000
 
-	void registerControlPoint(std::string name, ControlData& correctiondata);
-	void unRegisterControlPoint(std::string name);
+	void registerControlPoint(ControlData* correctionDataPointer);
+	void unRegisterControlPoint(ControlData* correctionDataPointer);
 
 private:
-	std::map<std::string, ControlData&> correctionList;
+	std::list<ControlData*> correctionList;
 
 	virtual void move(const ControlData& controldata)
 	{

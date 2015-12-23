@@ -16,22 +16,20 @@ MachineControl::~MachineControl()
 {
 }
 
-void MachineControl::setMove(const ControlData& controldata)
+void MachineControl::setMove(const ControlData & controldata)
 {
-	dataCorrection.zeroing();
+	dataCorrection = controldata;
 	for (auto it = correctionList.begin(); it != correctionList.end(); it++)
-		dataCorrection += it->second;
+		dataCorrection += **it;
 	move(dataCorrection);
 }
 
-void MachineControl::registerControlPoint(std::string name,
-		ControlData& correctionData)
+void MachineControl::registerControlPoint(ControlData* correctionDataPointer)
 {
-	correctionList.insert(
-			std::pair<std::string, ControlData&>(name, correctionData));
+	correctionList.push_back(correctionDataPointer);
 }
 
-void MachineControl::unRegisterControlPoint(std::string name)
+void MachineControl::unRegisterControlPoint(ControlData* correctionDataPointer)
 {
-	correctionList.erase(correctionList.find(name));
+	correctionList.remove(correctionDataPointer);
 }
