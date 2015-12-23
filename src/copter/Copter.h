@@ -18,18 +18,17 @@ public:
 	Copter();
 	~Copter();
 
-	void setAngle(Angle& throtCorrection);
-	void setArm();
-	void setDisarm();
+	//void setAngle(Angle& throtCorrection);
+	void setArm(bool onoff);
 	char isArmed(); // 1 is armed, 0 is disarmed, -1 if other
-	void setThrotCorrectionDisable();
-	void setThrotCorrectionByInputData();
-	void setThrotCorrectionByInputAngle();
-	char getThrotCorrectionMode();
+//	void setThrotCorrectionDisable();
+//	void setThrotCorrectionByInputData();
+//	void setThrotCorrectionByInputAngle();
+//	char getThrotCorrectionMode();
 	void setZeroGravityAccel(int Z_accel);
 	int  getZeroGravityAccel();
 	void applySettings();
-	//Что нужно сднлать в драйвере:
+	//todo: Что нужно сднлать в драйвере:
 	//1. таймер запросов
 	//2. //коректирующие ускорения
 	//3. //корекция по углам
@@ -38,8 +37,8 @@ public:
 private:
 	void move(const ControlData& controldata);
 
-	Angle _throtCorrectionAngle;
-	char _throtCorrectionMode;
+//	Angle _throtCorrectionAngle;
+//	char _throtCorrectionMode;
 	int _accelZeroGravity;
 	mw_move _controlData;
 };
