@@ -82,7 +82,8 @@ void Sonars::read(const uint8_t *inData, int byteToRead)
             if(CalcCRC == CmdCRC)
             {
                 //std::cout << "inData: " << portName << " " << distance << std::endl;
-                dataResived(SonarData(portName,distance));
+            	SonarData data(portName,distance);
+            	dataResived(data);
             }
             outReadingByte = 0;
             CalcCRC = 0;
@@ -90,10 +91,5 @@ void Sonars::read(const uint8_t *inData, int byteToRead)
 
         }
     }
-}
-
-void Sonars::dataResived(const SonarData data)
-{
-
 }
 

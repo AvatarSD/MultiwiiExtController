@@ -2,6 +2,7 @@
 #define SONARS_H
 
 #include "../../BoostSerialPort/BSerialPort.h"
+#include <functional>
 
 class SonarData
 {
@@ -33,7 +34,8 @@ public:
 
     void read(const uint8_t *inData, int byteToRead);
 
-    virtual void dataResived(const SonarData data);
+    //virtual void dataResived(const SonarData data);
+    std::function<void(const SonarData &)> dataResived;
 };
 
 #endif // SONARS_H
