@@ -11,6 +11,7 @@
 #include "hwiface/sonars.h"
 #include "../iface/types/control.h"
 #include "../service/pid/PID.h"
+#include "../service/timer/ThreadTimer.h"
 
 class SonarsCorrector
 {
@@ -21,15 +22,14 @@ public:
 	const ControlData * getCorrectionDataPointer();
 
 private:
-	SonarsCorrector();
+	ControlData _sonarCorrectionData;
+	PID _pidZ, _pidY, _pidX;
+	ThreadTimer _pidTimer;
 
-	ControlData sonarCorrectionData;
-	PID pidZ, pidY, pidX;
-
-	void inputData(SonarData& data);
+	void inputData(const SonarData& data);
 	void computePIDs();
 
-
+	Sonars & _sonarsIface;
 };
 
 #endif /* SONARS_SONARSCORRECTOR_H_ */
