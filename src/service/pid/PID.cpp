@@ -7,9 +7,10 @@
  * This Library is licensed under a GPLv3 License
  **********************************************************************************************/
 
+#include "../service/pid/PID.h"
+
 #include <sys/time.h>
 
-#include "PID.h"
 
 /*Constructor (...)*********************************************************
  *    The parameters specified here are those for for which we can't set up
