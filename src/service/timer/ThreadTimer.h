@@ -17,6 +17,7 @@ class ThreadTimer
 {
 public:
 	ThreadTimer(uint64_t usec);
+	~ThreadTimer();
 
 	std::function<void()> callback;
 
