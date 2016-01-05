@@ -27,6 +27,12 @@ private:
     uint16_t _distance;
 };
 
+
+
+
+
+
+
 class Sonars : public BSerialPort
 {
 public:
@@ -34,7 +40,6 @@ public:
 
     void read(const uint8_t *inData, int byteToRead);
 
-    //virtual void dataResived(const SonarData data);
     std::function<void(const SonarData &)> dataResived;
 };
 

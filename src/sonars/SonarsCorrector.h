@@ -12,6 +12,8 @@
 #include "../iface/types/control.h"
 #include "../service/pid/PID.h"
 #include "../service/timer/ThreadTimer.h"
+#include <list>
+#include <CGAL/Vector_3.h>
 
 class SonarsCorrector
 {
@@ -30,6 +32,9 @@ private:
 	void computePIDs();
 
 	Sonars & _sonarsIface;
+
+
+
 };
 
 #endif /* SONARS_SONARSCORRECTOR_H_ */
