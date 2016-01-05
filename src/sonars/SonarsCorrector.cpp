@@ -13,15 +13,15 @@ SonarsCorrector::~SonarsCorrector()
 }
 
 SonarsCorrector::SonarsCorrector(Sonars& sonarsIface) :
-		_sonarsIface(sonarsIface)
+		_sonarsIface(sonarsIface)//, _pidTimer()
 {
 	//_pidX();
 
 	_sonarsIface.dataResived = std::bind(&SonarsCorrector::inputData, this,
 			std::placeholders::_1);
 
-	_pidTimer.callback = std::bind(&SonarsCorrector::computePIDs, this);
-	_pidTimer.start();
+	//_pidTimer.callback = std::bind(&SonarsCorrector::computePIDs, this);
+	//_pidTimer.start();
 }
 
 const ControlData* SonarsCorrector::getCorrectionDataPointer()
@@ -35,7 +35,7 @@ void SonarsCorrector::inputData(const SonarData& data)
 
 void SonarsCorrector::computePIDs()
 {
-	_pidX.compute();
-	_pidY.compute();
-	_pidZ.compute();
+//	_pidX.compute();
+//	_pidY.compute();
+//	_pidZ.compute();
 }

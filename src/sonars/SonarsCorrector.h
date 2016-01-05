@@ -23,8 +23,8 @@ public:
 
 private:
 	ControlData _sonarCorrectionData;
-	PID _pidZ, _pidY, _pidX;
-	ThreadTimer _pidTimer;
+	//PID _pidZ, _pidY, _pidX;
+	//ThreadTimer _pidTimer;
 
 	void inputData(const SonarData& data);
 	void computePIDs();
