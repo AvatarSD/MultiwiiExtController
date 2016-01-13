@@ -2,6 +2,8 @@
 #define PPM_H
 
 #include <BoostSerialPort/BSerialPort.h>
+#include <list>
+#include <functional>
 
 class RC
 {
@@ -24,10 +26,19 @@ class PPM : public BSerialPort
 {
 public:
     PPM();
-    void read(const uint8_t *inData, int byteToRead);
+
+    std::function<void(const std::list<RC> & control)> controlData;
+    std::function<void(const std::list<RC> & control)> additionalData;
+
+
 private:
+    void read(const uint8_t *inData, int byteToRead);
     RC _rcTemp;
     virtual void dataResived(const RC & data);
+    void stdOut(const RC & data);
+
+    std::list<RC> _control;
+    std::list<RC> _additional;
 };
 
 #endif // PPM_H

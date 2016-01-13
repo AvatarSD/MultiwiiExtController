@@ -8,19 +8,39 @@
 #include <algorithm>
 #include <PPM/ppm.h>
 
-char* getCmdOption(char ** begin, char ** end, const std::string & option)
+#include "argparser.h"
+
+#define THR_CH 3
+#define YAW_CH 4
+#define ROLL_CH 2
+#define PITH_CH 1
+void stdOutControl(const std::list<RC> & data)
 {
-    char ** itr = std::find(begin, end, option);
-    if (itr != end && ++itr != end)
+    printf( "\033[2J" );
+    for(auto it = data.begin(); it != data.end(); it++)
     {
-        return *itr;
+        switch (it->channel()+1) {
+        case THR_CH:
+            std::cout << "THR: " << it->value() << std::endl;
+            break;
+        case YAW_CH:
+            std::cout << "YAW: " << it->value() << std::endl;
+            break;
+        case ROLL_CH:
+            std::cout << "ROLL: " << it->value() << std::endl;
+            break;
+        case PITH_CH:
+            std::cout << "PITH: " << it->value() << std::endl;
+            break;
+        default:
+            break;
+        }
     }
-    return 0;
 }
 
-bool cmdOptionExists(char** begin, char** end, const std::string& option)
+void stdOutAdditional(const std::list<RC> & data)
 {
-    return std::find(begin, end, option) != end;
+
 }
 
 
@@ -66,6 +86,8 @@ int main(int argc, char *argv[])
     {
         //Sonars Test
         PPM rcInput;
+        rcInput.controlData = &stdOutControl;
+        rcInput.additionalData = &stdOutAdditional;
         std::cout << "port stat: " << rcInput.BSerialPort::connect(getCmdOption(argv, argv + argc, "-p"))
                   << std::endl;
         while(1);

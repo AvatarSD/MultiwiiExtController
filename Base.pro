@@ -28,7 +28,8 @@ SOURCES += main.cpp\
     Joystick/JoystickAdv/joystickadv.cpp \
     sonars.cpp \
     sonarsroutine.cpp \
-    PPM/ppm.cpp
+    PPM/ppm.cpp \
+    argparser.cpp
 
 HEADERS  += mainwindow.h \
     basestationcore.h \
@@ -39,7 +40,8 @@ HEADERS  += mainwindow.h \
     Joystick/JoystickAdv/joytypes.h \
     sonars.h \
     sonarsroutine.h \
-    PPM/ppm.h
+    PPM/ppm.h \
+    argparser.h
 
 FORMS    += mainwindow.ui
 

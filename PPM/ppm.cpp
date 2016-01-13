@@ -86,7 +86,6 @@ void PPM::read(const uint8_t *inData, int byteToRead)
             unsigned char CmdCRC = inData[inputReadingByte];
             if(CalcCRC == CmdCRC)
             {
-        //    std::cout << "Channel: " << portNum << " \tValue: " << rcData << std::cout;
                 _rcTemp(portNum, rcData);
                 dataResived(_rcTemp);
             }
@@ -100,10 +99,31 @@ void PPM::read(const uint8_t *inData, int byteToRead)
 
 void PPM::dataResived(const RC & data)
 {
+    //stdOut(data);
+    if(data.channel() == 0)
+    {
+        if(!_additional.empty())
+            additionalData(_additional);
+        _control.clear();
+    }
+    if(data.channel()<=3)
+        _control.push_back(data);
+    if(data.channel() == 3)
+        controlData(_control);
+    if(data.channel()>=4)
+        _additional.push_back(data);
+}
+
+void PPM::stdOut(const RC & data)
+{
+    if(data.channel() == 0)
+        printf( "\033[2J" );
     std::cout << "Channel: " << (uint16_t)data.channel() << " \tValue: " << data.value() << std::endl;
 }
 
 
+
+/********************/
 RC::RC()
 {
     _channel = 0;
