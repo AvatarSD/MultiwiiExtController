@@ -63,9 +63,9 @@ void MainWindow::on_btnConnect_clicked()
     }
     else
     {
-      emit DisconnSig();
-      ConnectionStatus = 0;
-      ui->statusBar->showMessage("Disconnected");
+        emit DisconnSig();
+        ConnectionStatus = 0;
+        ui->statusBar->showMessage("Disconnected");
     }
 }
 
@@ -97,13 +97,8 @@ void MainWindow::showDisconnectedJoy(QString str)
     ui->btnConnectJoy->setText("Connect");
 }
 
-void MainWindow::showSonarsData(const SonarsData * data)
+void MainWindow::showSonarsData(SonarData data)
 {
-//if(data.getName() == "PD0")
-    ui->sonarBar->setValue(data->getVal());
-    /*
-    static int i = 0;
-    ui->sonarBar->setValue(i++);
-    if (i == 4000) i = 0;
-    */
+    if(data.getNameNum() == std::string("PD0"))
+        ui->sonarBar->setValue(data.getDistance());
 }

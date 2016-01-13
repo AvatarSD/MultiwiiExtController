@@ -12,6 +12,7 @@ TARGET = Base
 TEMPLATE = app
 
 CONFIG   += console
+CONFIG += c++11
 
 INCLUDEPATH += /usr/lib/
 INCLUDEPATH += /home/sd/boost_1_58_0/stage/lib/
@@ -26,7 +27,8 @@ SOURCES += main.cpp\
     basestationiface.cpp \
     Joystick/JoystickAdv/joystickadv.cpp \
     sonars.cpp \
-    sonarsroutine.cpp
+    sonarsroutine.cpp \
+    PPM/ppm.cpp
 
 HEADERS  += mainwindow.h \
     basestationcore.h \
@@ -36,7 +38,8 @@ HEADERS  += mainwindow.h \
     Joystick/JoystickAdv/joystickadv.h \
     Joystick/JoystickAdv/joytypes.h \
     sonars.h \
-    sonarsroutine.h
+    sonarsroutine.h \
+    PPM/ppm.h
 
 FORMS    += mainwindow.ui
 

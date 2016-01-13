@@ -36,7 +36,7 @@ JoystickAdv::~JoystickAdv()
     delete joydata;
 }
 
-void JoystickAdv::read(char * data, int byteToRead)
+void JoystickAdv::read(const uint8_t * data, int byteToRead)
 {
     /*inputs*/
     unsigned char * inData = (unsigned char *)data;

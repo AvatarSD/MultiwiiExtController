@@ -26,7 +26,7 @@ public:
 
 protected:
 	int _buffersize;
-    virtual void read(const char * inData, int byteToRead);
+    virtual void read(const uint8_t * inData, int byteToRead);
     virtual void writeComplete(const boost::system::error_code& error, std::size_t);
     virtual void disconnectEvent(std::string err);
 
@@ -35,7 +35,7 @@ private:
 	boost::asio::io_service _service;
 	boost::asio::serial_port * _port;
 	std::string _portname;
-	char * _dataBuffer;
+    uint8_t * _dataBuffer;
 	void worker();
 	void takeByte(const boost::system::error_code& error,
 			      std::size_t bytes_transferred);

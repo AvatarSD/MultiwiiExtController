@@ -18,7 +18,7 @@ signals:
 
 private:
     JoyData * joydata;
-    void read(char * data, int byteToRead);
+    void read(const uint8_t *data, int byteToRead);
     void disconnectEvent(std::string err);
 
 };

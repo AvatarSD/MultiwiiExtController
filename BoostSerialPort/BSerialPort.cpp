@@ -14,7 +14,7 @@ using namespace boost::asio;
 BSerialPort::BSerialPort(int bufLenth)
 {
     this->_buffersize = bufLenth;
-    this->_dataBuffer = new char[_buffersize];
+    this->_dataBuffer = new uint8_t[_buffersize];
     this->_port = new serial_port(this->_service);
 }
 
@@ -106,7 +106,7 @@ void BSerialPort::worker()
     }
 }
 
-void BSerialPort::read(const char * inData, int byteToRead)
+void BSerialPort::read(const uint8_t *inData, int byteToRead)
 {
     std::cout << _portname << " received " << byteToRead << " byte(s): " << inData << std::endl;
     //	std::memset(inData, 0, _buffersize);

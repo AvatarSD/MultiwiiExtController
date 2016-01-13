@@ -3,18 +3,19 @@
 
 #include <QObject>
 #include "sonars.h"
+#include "mainwindow.h"
 
 class SonarsRoutine : public QObject, public Sonars
 {
     Q_OBJECT
 public:
-    explicit SonarsRoutine(QObject *parent = 0);
-
-signals:
-    void incomingDataRsv(const SonarsData * data);
+    explicit SonarsRoutine( bool isSimple, /*MainWindow * w,*/ QObject *parent = 0);
 
 private:
-    void incomingData(const SonarsData & data);
+    void dataResived(const SonarData data);
+    //MainWindow * _w;
+    void stdOut(const SonarData & data);
+    bool _simple;
 };
 
 #endif // SONARSROUTINE_H
