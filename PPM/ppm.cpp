@@ -99,26 +99,22 @@ void PPM::read(const uint8_t *inData, int byteToRead)
 
 void PPM::dataResived(const RC & data)
 {
-    //stdOut(data);
     if(data.channel() == 0)
     {
         if(!_additional.empty())
             additionalData(_additional);
         _control.clear();
+        _additional.clear();
     }
+
     if(data.channel()<=3)
         _control.push_back(data);
+
     if(data.channel() == 3)
         controlData(_control);
+
     if(data.channel()>=4)
         _additional.push_back(data);
-}
-
-void PPM::stdOut(const RC & data)
-{
-    if(data.channel() == 0)
-        printf( "\033[2J" );
-    std::cout << "Channel: " << (uint16_t)data.channel() << " \tValue: " << data.value() << std::endl;
 }
 
 

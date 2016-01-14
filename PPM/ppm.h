@@ -35,7 +35,6 @@ private:
     void read(const uint8_t *inData, int byteToRead);
     RC _rcTemp;
     virtual void dataResived(const RC & data);
-    void stdOut(const RC & data);
 
     std::list<RC> _control;
     std::list<RC> _additional;

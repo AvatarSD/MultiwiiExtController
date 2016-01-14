@@ -9,6 +9,7 @@
 #include <PPM/ppm.h>
 
 #include "argparser.h"
+#include "argp.h"
 
 #define THR_CH 3
 #define YAW_CH 4
@@ -16,33 +17,42 @@
 #define PITH_CH 1
 void stdOutControl(const std::list<RC> & data)
 {
-    printf( "\033[2J" );
-    for(auto it = data.begin(); it != data.end(); it++)
-    {
-        switch (it->channel()+1) {
-        case THR_CH:
-            std::cout << "THR: " << it->value() << std::endl;
-            break;
-        case YAW_CH:
-            std::cout << "YAW: " << it->value() << std::endl;
-            break;
-        case ROLL_CH:
-            std::cout << "ROLL: " << it->value() << std::endl;
-            break;
-        case PITH_CH:
-            std::cout << "PITH: " << it->value() << std::endl;
-            break;
-        default:
-            break;
-        }
-    }
+//    printf( "\033[2J" );
+//    for(auto it = data.begin(); it != data.end(); it++)
+//    {
+//        switch (it->channel()+1) {
+//        case THR_CH:
+//            std::cout << "THR: " << it->value() << std::endl;
+//            break;
+//        case YAW_CH:
+//            std::cout << "YAW: " << it->value() << std::endl;
+//            break;
+//        case ROLL_CH:
+//            std::cout << "ROLL: " << it->value() << std::endl;
+//            break;
+//        case PITH_CH:
+//            std::cout << "PITH: " << it->value() << std::endl;
+//            break;
+//        default:
+//            break;
+//        }
+//    }
 }
 
 void stdOutAdditional(const std::list<RC> & data)
 {
-
+    printf( "\033[2J" );
+    std::cout << std::endl << std::endl << std::endl << std::endl;
+    for(auto it = data.begin(); it != data.end(); it++)
+            std::cout << "Num: " << (uint16_t)it->channel() << " \tVal: " << it->value() << std::endl;
 }
 
+//void PPM::stdOut(const RC & data)
+//{
+//    if(data.channel() == 0)
+//        printf( "\033[2J" );
+//    std::cout << "Channel: " << (uint16_t)data.channel() << " \tValue: " << data.value() << std::endl;
+//}
 
 int main(int argc, char *argv[])
 {
