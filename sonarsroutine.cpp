@@ -2,8 +2,7 @@
 
 #include <iostream>
 #include <list>
-using namespace std;
-
+#include <ctime>
 
 SonarsRoutine::SonarsRoutine(bool isSimple, QObject *parent) : QObject(parent), Sonars(), _simple(isSimple)//, _w(w)
 {
@@ -24,31 +23,37 @@ void SonarsRoutine::dataResived(const SonarData data)
 void SonarsRoutine::stdOut(const SonarData & data)
 {
     static std::list<SonarData> dataList;
+    static uint64_t lastTime = 0;
 
-if(_simple)
-    std::cout << "Name is: " << data.getName()<< "\tNum is: " << data.getNum() << "\tDist: " << data.getDistance() << std::endl;
-else
-    if( data.getName() == "SB")
-    {
-        printf( "\033[2J" );
-        for (uint8_t i = 0; i<18; i++)
-        {
-            std::cout << (uint32_t)i << ": ";
-            std::string temp = string("SR") + std::to_string(i);
-            auto it = dataList.begin();
-            for(; it!= dataList.end(); it++)
-                if(it->getNameNum() == temp)
-                {
-                    std::cout << "Name is: " << it->getName()<< "\tNum is: " << it->getNum() << "\tDist: " << it->getDistance();
-                    break;
-                }
-            if(it == dataList.end())
-                std::cout << "---";
-            cout << std::endl;
-        }
-        dataList.clear();
-    }
+    if(_simple)
+        std::cout << "Name is: " << data.getName()<< "\tNum is: " << data.getNum() << "\tDist: " << data.getDistance() << std::endl;
     else
-        dataList.push_back(data);
+        if( data.getName() == "SB")
+        {
+            uint64_t currTime = clock();
+            uint64_t timeLeft = currTime - lastTime;
+            lastTime = currTime;
+
+            printf( "\033[2J" );
+            std::cout << "Time: " << timeLeft << "msec" << std::endl;
+            for (uint8_t i = 0; i<18; i++)
+            {
+                std::cout << (uint32_t)i << ": ";
+                std::string temp = std::string("SR") + std::to_string(i);
+                auto it = dataList.begin();
+                for(; it!= dataList.end(); it++)
+                    if(it->getNameNum() == temp)
+                    {
+                        std::cout << "Name is: " << it->getName()<< "\tNum is: " << it->getNum() << "\tDist: " << it->getDistance();
+                        break;
+                    }
+                if(it == dataList.end())
+                    std::cout << "---";
+                std::cout << std::endl;
+            }
+            dataList.clear();
+        }
+        else
+            dataList.push_back(data);
 
 }
