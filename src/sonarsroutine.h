@@ -1,15 +1,14 @@
 #ifndef SONARSROUTINE_H
 #define SONARSROUTINE_H
 
-#include <QObject>
-#include "sonars.h"
-#include "mainwindow.h"
 
-class SonarsRoutine : public QObject, public Sonars
+#include "sonars.h"
+#
+
+class SonarsRoutine : public  public Sonars
 {
-    Q_OBJECT
 public:
-    explicit SonarsRoutine( bool isSimple, /*MainWindow * w,*/ QObject *parent = 0);
+	SonarsRoutine( bool isSimple);
 
 private:
     void dataResived(const SonarData data);
