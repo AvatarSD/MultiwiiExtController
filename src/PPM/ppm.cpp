@@ -18,12 +18,14 @@
 
 #define ChecksumByteNum 6
 
-PPM::PPM()
+PPM::PPM(AsyncIOStream & iface) :
+		_iface(iface)
 {
-
+	using namespace std::placeholders;
+	_iface.read = std::bind(&PPM::read, this, _1, _2);
 }
 
-void PPM::read(const uint8_t *inData, int byteToRead)
+void PPM::read(const uint8_t * inData, uint32_t byteToRead)
 {
 	/*outputs*/
 	static uint8_t outReadingByte = 0;
@@ -31,7 +33,7 @@ void PPM::read(const uint8_t *inData, int byteToRead)
 	static uint8_t portNum;
 	static uint8_t CalcCRC = 0;
 
-	for (int inputReadingByte = 0; inputReadingByte < byteToRead;
+	for (uint32_t inputReadingByte = 0; inputReadingByte < byteToRead;
 			inputReadingByte++)
 	{
 		//if(outReadingByte==0) memset(joydata, 0, sizeof(JoyData));

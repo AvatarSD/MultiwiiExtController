@@ -106,12 +106,6 @@ void BSerialPort::worker()
     }
 }
 
-void BSerialPort::read(const uint8_t *inData, int byteToRead)
-{
-    std::cout << _portname << " received " << byteToRead << " byte(s): " << inData << std::endl;
-    //	std::memset(inData, 0, _buffersize);
-}
-
 void BSerialPort::writeComplete(const boost::system::error_code& error,
                                 std::size_t)
 {

@@ -4,20 +4,19 @@
 #include "joytypes.h"
 #include "../../BoostSerialPort/BSerialPort.h"
 
-class JoystickAdv : public BSerialPort
+class JoystickAdv
 {
 public:
-    explicit JoystickAdv();
+    JoystickAdv(AsyncIOStream & iface);
     ~JoystickAdv();
 
     std::function<void(const JoyData&)> dataRsv;
     std::function<void(const std::string&)> disconnected;
 
 private:
-    JoyData * joydata;
-    void read(const uint8_t *data, int byteToRead);
-    void disconnectEvent(std::string err);
-
+    JoyData joydata;
+    void read(const uint8_t * inData, uint32_t byteToRead);
+    AsyncIOStream & _iface;
 };
 
 #endif // JOYSTICKADV_H

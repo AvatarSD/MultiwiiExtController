@@ -1,15 +1,17 @@
 #include "streamreader.h"
 
-StreamReader::StreamReader() :
-		BSerialPort()
+StreamReader::StreamReader(AsyncIOStream & iface) :
+		_iface(iface)
 {
+	using namespace std::placeholders;
+	_iface.read = std::bind(&StreamReader::read, this, _1, _2);
 }
 
 StreamReader::~StreamReader()
 {
 }
 
-void StreamReader::read(char * inData, int byteToRead)
+void StreamReader::read(const uint8_t * inData, uint32_t byteToRead)
 {
 	/*outputs*/
 	static uint8_t * outHeader, *outData; // = new unsigned char[RX_Buffer];
@@ -18,7 +20,7 @@ void StreamReader::read(char * inData, int byteToRead)
 	static uint32_t dataLength;
 	static uint8_t CmdCRC, CalcCRC = 0;
 
-	for (int InputReadingByte = 0; InputReadingByte < byteToRead;
+	for (uint32_t InputReadingByte = 0; InputReadingByte < byteToRead;
 			InputReadingByte++)
 	{
 		//detect startBytes
@@ -131,7 +133,7 @@ void StreamReader::read(char * inData, int byteToRead)
 void StreamReader::sendCmd(const Message & message)
 {
 	char cheksum = 0;
-	char * buf = new char[strlen(startBytes) + sizeof(message.headerLength)
+	uint8_t * buf = new uint8_t[strlen(startBytes) + sizeof(message.headerLength)
 			+ sizeof(message.dataLength) + message.headerLength
 			+ message.dataLength + sizeof(cheksum)];
 
@@ -178,7 +180,7 @@ void StreamReader::sendCmd(const Message & message)
 			+ sizeof(message.dataLength) + message.headerLength
 			+ message.dataLength] = cheksum;
 
-	this->write(buf,
+	_iface.write(buf,
 			strlen(startBytes) + sizeof(message.headerLength)
 					+ sizeof(message.dataLength) + message.headerLength
 					+ message.dataLength + sizeof(cheksum));

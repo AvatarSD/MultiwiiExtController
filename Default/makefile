@@ -8,6 +8,7 @@ RM := rm
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include src/stream/subdir.mk
 -include src/sonars/subdir.mk
 -include src/core/subdir.mk
 -include src/consoleOut/subdir.mk

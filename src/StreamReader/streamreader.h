@@ -37,10 +37,10 @@ struct Message
 	const uint32_t dataLength;
 };
 
-class StreamReader: public BSerialPort
+class StreamReader
 {
 public:
-	StreamReader();
+	StreamReader(AsyncIOStream & iface);
 	~StreamReader();
 
 	// Call this method for send something
@@ -48,8 +48,8 @@ public:
 	std::function<void(const Message & message)> takeCmd;
 
 private:
-	void read(char * inData, int byteToRead); // Parse the input data then call takeCmd()
-	//BSerialPort & _iface;
+	void read(const uint8_t * inData, uint32_t byteToRead); // Parse the input data then call takeCmd()
+	AsyncIOStream & _iface;
 };
 
 #endif // BASESTREAMER_H

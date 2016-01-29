@@ -27,22 +27,24 @@ private:
 	uint16_t _value;
 };
 
-class PPM: public BSerialPort
+class PPM
 {
 public:
-	PPM();
+	PPM(AsyncIOStream & iface);
 
 	std::function<void(const std::list<RC> & control)> controlData;
 	std::function<void(const std::list<RC> & control)> additionalData;
 	std::function<void(const RC &)> rawDataResived;
 
 private:
-	void read(const uint8_t *inData, int byteToRead);
+	void read(const uint8_t * inData, uint32_t byteToRead);
 	void dataParse(const RC & data);
 	RC _rcTemp;
 
 	std::list<RC> _control;
 	std::list<RC> _additional;
+
+	AsyncIOStream & _iface;
 };
 
 #endif // PPM_H

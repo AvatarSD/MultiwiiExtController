@@ -39,16 +39,16 @@ private:
 
 };
 
-class Sonars : public BSerialPort
+class Sonars
 {
 public:
-    Sonars();
+    Sonars(AsyncIOStream & iface);
 
     std::function<void(const SonarData &)> dataResived;
 
 private:
-    void read(const uint8_t *inData, int byteToRead);
-
+    void read(const uint8_t * inData, uint32_t byteToRead);
+    AsyncIOStream & _iface;
 };
 
 #endif // SONARS_H
