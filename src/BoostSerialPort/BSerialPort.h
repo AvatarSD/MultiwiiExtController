@@ -24,6 +24,8 @@ public:
 
 	bool isConnected();
 
+	void write(const uint8_t * data, uint32_t byteToWrite);
+
 /* todo make as functional */
 	virtual void writeComplete(const boost::system::error_code& error,
 			std::size_t);
@@ -39,7 +41,6 @@ private:
 	void worker();
 	void takeByte(const boost::system::error_code& error,
 			std::size_t bytes_transferred);
-	void write(char * data,int byteToWrite);
 };
 
 #endif /* BOOSTSERIALPORT_BSERIALPORT_H_ */

@@ -17,6 +17,8 @@
 int main(int argc, char *argv[])
 {
 
+	BSerialPort port;
+
 	if (cmdOptionExists(argv, argv + argc, "-G"))
 	{
 //
@@ -46,13 +48,13 @@ int main(int argc, char *argv[])
 	else if (cmdOptionExists(argv, argv + argc, "-S"))
 	{
 		//Sonars Test
-		Sonars sonars;
+		Sonars sonars(port);
 
 		SonarsRoutine sonarsroutine(sonars);
 		sonarsroutine.setMode(cmdOptionExists(argv, argv + argc, "-s"));
 
 		std::cout << "port stat: "
-				<< sonars.BSerialPort::connect(
+				<< port.connect(
 						getCmdOption(argv, argv + argc, "-p")) << std::endl;
 		while (1)
 			;
@@ -61,7 +63,7 @@ int main(int argc, char *argv[])
 	else if (cmdOptionExists(argv, argv + argc, "-R"))
 	{
 		//Sonars Test
-		PPM rcInput;
+		PPM rcInput(port);
 
 		PPMroutine ppmroutine(rcInput);
 		if (!cmdOptionExists(argv, argv + argc, "-a"))
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
 			ppmroutine.setup(PPMroutine::ADDITIONAL);
 
 		std::cout << "port stat: "
-				<< rcInput.BSerialPort::connect(
+				<< port.connect(
 						getCmdOption(argv, argv + argc, "-p")) << std::endl;
 		while (1)
 			;

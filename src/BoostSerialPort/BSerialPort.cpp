@@ -85,7 +85,7 @@ void BSerialPort::takeByte(const boost::system::error_code& error,
     }
 }
 
-void BSerialPort::write(char * data,int byteToWrite)
+void BSerialPort::write(const uint8_t * data, uint32_t byteToWrite)
 {
     _port->async_write_some(buffer(data, byteToWrite),
                             boost::bind(&BSerialPort::writeComplete, this, _1, _2));

@@ -18,3 +18,6 @@ AsyncIOStream::~AsyncIOStream()
 	// TODO Auto-generated destructor stub
 }
 
+void AsyncIOStream::write(const uint8_t* data, uint32_t byteToWrite)
+{
+}
