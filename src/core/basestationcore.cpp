@@ -1,20 +1,21 @@
 #include "basestationcore.h"
 #include <cstring>
 
-BaseStationCore::BaseStationCore(QObject *parent) : QObject(parent)
+BaseStationCore::BaseStationCore()
 {
     moveData = new mw_move;
 }
 
 BaseStationCore::~BaseStationCore()
 {
-
+delete moveData;
 }
 
-void BaseStationCore::inCmd(char* header, char* messege, unsigned char headLenth, unsigned int messegeLenth)
+void BaseStationCore::inCmd(const uint8_t * header, const uint8_t * messege, uint8_t headLenth, uint32_t messegeLenth)
 {
 
-    if(0 == std::strcmp("metric", header)) emit outMetrik((mw_metric*)messege);
+    if(0 == strcmp("metric", (const char*)header))
+    	outMetrik((mw_metric*)messege);
 }
 
 void BaseStationCore::inJoyData(JoyData * data)
@@ -29,12 +30,12 @@ void BaseStationCore::inJoyData(JoyData * data)
     moveData->AUX4 = 1500;
 
 //    static int f = 0;
-//    if(f == 2)
+//    if(f++ == 2)
 //    {
-        emit outCmd("move", (char*)moveData, strlen("move"), 16);
+        outCmd((uint8_t*)"move", (uint8_t*)moveData, strlen("move"), 16);
 //        f=0;
 //    }
-//    f++;
+
 
 }
 

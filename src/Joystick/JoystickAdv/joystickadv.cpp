@@ -26,7 +26,7 @@ Byte [16,17]: Checksum. All bytes of payload added up, MSB first.
 #define dataByte 11
 
 
-JoystickAdv::JoystickAdv(QObject *parent) : QObject(parent), BSerialPort()
+JoystickAdv::JoystickAdv() : BSerialPort()
 {
     joydata = new JoyData();
 }
@@ -81,7 +81,7 @@ void JoystickAdv::read(const uint8_t * data, int byteToRead)
             CmdCRC += inData[InputReadingByte];
             for(unsigned char i = 0; i < sizeof(JoyData); i++) CalcCRC += ((unsigned char*)joydata)[i];
             if(CmdCRC == CalcCRC)
-                emit dataRsv(joydata);
+                dataRsv(*joydata);
             OutReadingByte = 0;
             break;
 
@@ -96,5 +96,5 @@ void JoystickAdv::read(const uint8_t * data, int byteToRead)
 
 void JoystickAdv::disconnectEvent(std::string err)
 {
-    emit disconnected(QString::fromStdString(err));
+    disconnected(err);
 }

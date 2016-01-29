@@ -1,7 +1,7 @@
 #ifndef SONARS_H
 #define SONARS_H
 
-#include "BoostSerialPort/BSerialPort.h"
+#include "../BoostSerialPort/BSerialPort.h"
 
 class SonarData
 {
@@ -44,10 +44,11 @@ class Sonars : public BSerialPort
 public:
     Sonars();
 
-    void read(const uint8_t *inData, int byteToRead);
+    std::function<void(const SonarData &)> dataResived;
 
 private:
-    virtual void dataResived(const SonarData data);
+    void read(const uint8_t *inData, int byteToRead);
+
 };
 
 #endif // SONARS_H

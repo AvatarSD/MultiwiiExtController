@@ -87,8 +87,3 @@ void Sonars::read(const uint8_t *inData, int byteToRead)
     }
 }
 
-void Sonars::dataResived(const SonarData data)
-{
-
-}
-

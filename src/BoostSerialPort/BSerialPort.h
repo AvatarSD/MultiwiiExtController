@@ -20,25 +20,26 @@ public:
 
 	int connect(std::string port, int baud = 115200);
 	void disconnect();
-	void write(char * data,int byteToWrite);
+	void write(char * data, int byteToWrite);
 
 	bool isConnected();
 
 protected:
 	int _buffersize;
-    virtual void read(const uint8_t * inData, int byteToRead);
-    virtual void writeComplete(const boost::system::error_code& error, std::size_t);
-    virtual void disconnectEvent(std::string err);
+	virtual void read(const uint8_t * inData, int byteToRead);
+	virtual void writeComplete(const boost::system::error_code& error,
+			std::size_t);
+	virtual void disconnectEvent(std::string err);
 
 private:
 	/* COM PORT variables */
 	boost::asio::io_service _service;
 	boost::asio::serial_port * _port;
 	std::string _portname;
-    uint8_t * _dataBuffer;
+	uint8_t * _dataBuffer;
 	void worker();
 	void takeByte(const boost::system::error_code& error,
-			      std::size_t bytes_transferred);
+			std::size_t bytes_transferred);
 };
 
 #endif /* BOOSTSERIALPORT_BSERIALPORT_H_ */
