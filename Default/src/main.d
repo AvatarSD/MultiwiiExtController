@@ -6,7 +6,7 @@ src/main.d: ../src/main.cpp ../src/StreamReader/streamreader.h \
  ../src/consoleOut/../PPM/../BoostSerialPort/BSerialPort.h \
  ../src/core/basestationcore.h ../src/core/mwtypes.h \
  ../src/core/../Joystick/JoystickAdv/joytypes.h \
- ../src/argpars/argparser.h
+ ../src/core/../StreamReader/streamreader.h ../src/argpars/argparser.h
 
 ../src/StreamReader/streamreader.h:
 
@@ -29,5 +29,7 @@ src/main.d: ../src/main.cpp ../src/StreamReader/streamreader.h \
 ../src/core/mwtypes.h:
 
 ../src/core/../Joystick/JoystickAdv/joytypes.h:
+
+../src/core/../StreamReader/streamreader.h:
 
 ../src/argpars/argparser.h:

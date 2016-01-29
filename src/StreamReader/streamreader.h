@@ -45,12 +45,10 @@ public:
 
 	// Call this method for send something
 	void sendCmd(const Message & message);
+	std::function<void(const Message & message)> takeCmd;
 
 private:
 	void read(char * inData, int byteToRead); // Parse the input data then call takeCmd()
-
-	std::function<void(const Message & message)> takeCmd;
-
 	//BSerialPort & _iface;
 };
 

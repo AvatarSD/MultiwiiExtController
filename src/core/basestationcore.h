@@ -6,23 +6,24 @@
 #include "../Joystick/JoystickAdv/joytypes.h"
 #include <inttypes.h>
 #include <functional>
+#include "../StreamReader/streamreader.h"
 
 class BaseStationCore
 {
 public:
-    BaseStationCore();
+    BaseStationCore(StreamReader & reader);
     ~BaseStationCore();
 
-    void inCmd(const uint8_t *, const uint8_t *, uint8_t, uint32_t);
-    void inJoyData(JoyData * data);
+    void inCmd(const Message & message);
+    void inJoyData(const JoyData & data);
 
 private:
-    //mw_move * moveData;
+    mw_move moveData;
 
-  //  std::function<void(const uint8_t *, const uint8_t *, uint8_t, uint32_t)> outCmd;
-    std::function<void(mw_metric*)> outMetrik;
+    std::function<void(const mw_metric*)> outMetrik;
     void outMove(mw_move * data);
 
+    StreamReader & _reader;
 };
 
 #endif // BASESTATIONCORE_H
