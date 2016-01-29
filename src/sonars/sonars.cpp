@@ -3,11 +3,10 @@
 #include "iostream"
 
 #define $Byte '$'
-//#define PByte 'P'
 #define $ByteNum 0
-#define PByteNum 1
-#define LBSportByteNum 2
-#define MBSportByteNum 3
+#define firstByteNameNum 1
+#define secondByteNameNum 2
+#define thirdByteNameNum 3
 #define LBSdataByteNum 4
 #define MBSdataByteNum 5
 #define ChecksumByteNum 6
@@ -44,20 +43,20 @@ void Sonars::read(const uint8_t *inData, int byteToRead)
             }
             break;
 
-        case PByteNum:
+        case firstByteNameNum:
             portName[0] = inData[inputReadingByte];
             CalcCRC ^= inData[inputReadingByte];
             outReadingByte++;
             break;
 
-        case LBSportByteNum:
+        case secondByteNameNum:
             portName[1] = inData[inputReadingByte];
             portName[2] = '\0';
             CalcCRC ^= inData[inputReadingByte];
             outReadingByte++;
             break;
 
-        case MBSportByteNum:
+        case thirdByteNameNum:
             portNum = inData[inputReadingByte];
             CalcCRC ^= inData[inputReadingByte];
             outReadingByte++;

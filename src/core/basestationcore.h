@@ -19,10 +19,7 @@ public:
 
 private:
     mw_move moveData;
-
     std::function<void(const mw_metric*)> outMetrik;
-    void outMove(mw_move * data);
-
     StreamReader & _reader;
 };
 
