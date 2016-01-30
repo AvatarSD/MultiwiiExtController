@@ -85,3 +85,45 @@ void Sonars::read(const uint8_t * inData, uint32_t byteToRead)
     }
 }
 
+bool Sonars::setTimingMap(const TimingMap& timingMap)
+{
+
+
+	return 1;
+}
+
+TimingMap Sonars::getTimingMap()
+{
+	TimingMap timing;
+
+	/**/
+
+
+
+	return timing;
+}
+
+
+bool Sonars::setRelaxTime(uint8_t timingMap)
+{
+
+	return 1;
+}
+
+uint8_t Sonars::getRelaxTime()
+{
+
+	return 1;
+}
+
+bool Sonars::startMeasuring()
+{
+
+	return 1;
+}
+
+bool Sonars::stopMeasuring()
+{
+
+	return 1;
+}

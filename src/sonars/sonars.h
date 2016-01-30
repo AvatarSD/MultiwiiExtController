@@ -39,12 +39,24 @@ private:
 
 };
 
+
+typedef std::map<uint8_t, uint8_t> TimingMap;
+
 class Sonars
 {
 public:
     Sonars(AsyncIOStream & iface);
 
     std::function<void(const SonarData &)> dataResived;
+
+    bool setTimingMap(const TimingMap & timingMap);
+    TimingMap getTimingMap();
+
+    bool setRelaxTime(uint8_t timingMap);
+    uint8_t getRelaxTime();
+
+    bool startMeasuring();
+    bool stopMeasuring();
 
 private:
     void read(const uint8_t * inData, uint32_t byteToRead);
