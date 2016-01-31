@@ -61,6 +61,8 @@ public:
 private:
     void read(const uint8_t * inData, uint32_t byteToRead);
     AsyncIOStream & _iface;
+
+    void writeCmd(const char * cmd, uint16_t dataSize, uint8_t * data);
 };
 
 #endif // SONARS_H
