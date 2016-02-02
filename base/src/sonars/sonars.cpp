@@ -133,32 +133,43 @@ void Sonars::writeCmd(const char* cmd, uint16_t dataSize, uint8_t* data)
 #define HEADER_LEN 3
 #define DIR_BYTE 'C'
 #define CMD_LEN 2
+#define BUFF_SIZE 512
 
 	uint8_t crc = 0;
 
 	uint32_t packetSize = HEADER_LEN + sizeof(DIR_BYTE) + sizeof(dataSize) +
 	CMD_LEN + dataSize + sizeof(crc);
 
-	uint8_t * buff = new uint8_t[packetSize];
+	static uint8_t buff[BUFF_SIZE];
+	//uint8_t * buff = new uint8_t[packetSize];
 
 	uint32_t pointer = 0;
-	for (; pointer < packetSize - sizeof(crc); pointer++)
-	{
-		if (pointer < HEADER_LEN)
-			buff[pointer] = HEADER[pointer];
 
-		else if (pointer == HEADER_LEN)
-			buff[pointer] = DIR_BYTE;
+	//write header
+	for (int i = 0; i < HEADER_LEN; i++)
+		buff[pointer++] = HEADER[i];
 
-		else if((pointer > HEADER_LEN)&&(pointer < (HEADER_LEN + 3)))
-		{
+	//write direction byte
+	buff[pointer++] = DIR_BYTE;
 
-		}
+	//write command
+	for (int i = 0; i < CMD_LEN; i++)
+		buff[pointer++] = cmd[i];
 
-			crc ^= buff[pointer];
-	}
+	//write data
+	for (int i = 0; i < dataSize; i++)
+		buff[pointer++] = data[i];
+
+	//calc crc
+	for (uint i = 0; i < packetSize - 1; i++)
+		crc ^= buff[i];
+
+	//write crc
 	buff[pointer++] = crc;
 
+	//send data
 	_iface.write(buff, pointer);
-	delete[] buff;
+
+	//delete temp buff;
+	//delete[] buff;
 }
