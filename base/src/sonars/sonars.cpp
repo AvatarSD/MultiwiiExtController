@@ -141,7 +141,6 @@ void Sonars::writeCmd(const char* cmd, uint16_t dataSize, uint8_t* data)
 	CMD_LEN + dataSize + sizeof(crc);
 
 	static uint8_t buff[BUFF_SIZE];
-	//uint8_t * buff = new uint8_t[packetSize];
 
 	uint32_t pointer = 0;
 
@@ -170,6 +169,4 @@ void Sonars::writeCmd(const char* cmd, uint16_t dataSize, uint8_t* data)
 	//send data
 	_iface.write(buff, pointer);
 
-	//delete temp buff;
-	//delete[] buff;
 }
