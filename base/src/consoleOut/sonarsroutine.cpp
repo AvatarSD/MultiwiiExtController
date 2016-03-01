@@ -11,7 +11,7 @@ SonarsRoutine::SonarsRoutine(Sonars & iface) :
 			std::placeholders::_1);
 }
 
-void SonarsRoutine::dataResived(const SonarData & data)
+void SonarsRoutine::dataResived(const DistSensorData & data)
 {
 	//emit incomingDataRsv(data);
 	// _w->showSonarsData(data);
@@ -22,9 +22,9 @@ void SonarsRoutine::dataResived(const SonarData & data)
 
 }
 
-void SonarsRoutine::stdOut(const SonarData & data)
+void SonarsRoutine::stdOut(const DistSensorData & data)
 {
-	static std::list<SonarData> dataList;
+	static std::list<DistSensorData> sonarDataList, opticalDataList;
 
 	if (_simple)
 		std::cout << "Name is: " << data.getName() << "\tNum is: "
@@ -32,28 +32,56 @@ void SonarsRoutine::stdOut(const SonarData & data)
 				<< std::endl;
 	else if (data.getName() == "SB")
 	{
+		//sonarDataList.clear();
+		//opticalDataList.clear();
+	}
+	else if (data.getName() == "IT")
+	{
 		printf("\033[2J");
-		for (uint8_t i = 0; i < 18; i++)
+		for (uint8_t i = 0; i < 16; i++)
 		{
 			std::cout << (uint32_t) i << ": ";
 			std::string temp = string("SR") + std::to_string(i);
-			auto it = dataList.begin();
-			for (; it != dataList.end(); it++)
+			auto it = sonarDataList.begin();
+			for (; it != sonarDataList.end(); it++)
 				if (it->getNameNum() == temp)
 				{
 					std::cout << "Name is: " << it->getName() << "\tNum is: "
 							<< it->getNum() << "\tDist: " << it->getDistance();
 					break;
 				}
-			if (it == dataList.end())
+			if (it == sonarDataList.end())
 				std::cout << "---";
 			cout << std::endl;
 		}
-		dataList.clear();
-	}
-	else
-		dataList.push_back(data);
 
+		for (uint8_t i = 0; i < 16; i++)
+		{
+			std::cout << (uint32_t) i << ": ";
+			std::string temp = string("OP") + std::to_string(i);
+			auto it = opticalDataList.begin();
+			for (; it != opticalDataList.end(); it++)
+				if (it->getNameNum() == temp)
+				{
+					std::cout << "Name is: " << it->getName() << "\tNum is: "
+							<< it->getNum() << "\tDist: " << it->getDistance();
+					break;
+				}
+			if (it == opticalDataList.end())
+				std::cout << "---";
+			cout << std::endl;
+		}
+	}
+	else if (data.getName() == "SR")
+	{
+		sonarDataList.remove(data);
+		sonarDataList.push_back(data);
+	}
+	else if (data.getName() == "OP")
+	{
+		opticalDataList.remove(data);
+		opticalDataList.push_back(data);
+	}
 }
 
 void SonarsRoutine::setMode(bool simple)

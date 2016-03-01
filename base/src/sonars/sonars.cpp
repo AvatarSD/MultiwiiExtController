@@ -79,7 +79,7 @@ void Sonars::read(const uint8_t * inData, uint32_t byteToRead)
 		case ChecksumByteNum:
 			unsigned char CmdCRC = inData[inputReadingByte];
 			if (CalcCRC == CmdCRC)
-				dataResived(SonarData(portName, portNum, distance));
+				dataResived(DistSensorData(portName, portNum, distance));
 			outReadingByte = 0;
 			CalcCRC = 0;
 			break;

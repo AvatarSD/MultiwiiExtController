@@ -13,8 +13,8 @@ public:
 
 private:
 	//MainWindow * _w;
-    void dataResived(const SonarData & data);
-    void stdOut(const SonarData & data);
+    void dataResived(const DistSensorData & data);
+    void stdOut(const DistSensorData & data);
 
     Sonars & _iface;
     bool _simple;
