@@ -38,6 +38,7 @@ void SonarsRoutine::stdOut(const DistSensorData & data)
 	else if (data.getName() == "IT")
 	{
 		printf("\033[2J");
+		std::cout << "Sonars:" << std::endl;
 		for (uint8_t i = 0; i < 16; i++)
 		{
 			std::cout << (uint32_t) i << ": ";
@@ -54,7 +55,7 @@ void SonarsRoutine::stdOut(const DistSensorData & data)
 				std::cout << "---";
 			cout << std::endl;
 		}
-
+		std::cout << std::endl << "Optical:" << std::endl;
 		for (uint8_t i = 0; i < 16; i++)
 		{
 			std::cout << (uint32_t) i << ": ";
