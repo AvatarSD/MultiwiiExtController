@@ -24,7 +24,8 @@ void SonarsRoutine::dataResived(const DistSensorData & data)
 
 void SonarsRoutine::stdOut(const DistSensorData & data)
 {
-	static std::list<DistSensorData> sonarDataList, opticalDataList;
+	static std::list<DistSensorData> sonarDataList, opticalDataList,
+			lastSonarDataList, diffSonarDataList;
 
 	if (_simple)
 		std::cout << "Name is: " << data.getName() << "\tNum is: "
@@ -32,8 +33,17 @@ void SonarsRoutine::stdOut(const DistSensorData & data)
 				<< std::endl;
 	else if (data.getName() == "SB")
 	{
-		//sonarDataList.clear();
-		//opticalDataList.clear();
+		for (auto it = diffSonarDataList.begin(); it != diffSonarDataList.end();
+				it++)
+			lastSonarDataList.remove(*it);
+
+		for (auto it = lastSonarDataList.begin(); it != lastSonarDataList.end();
+				it++)
+			sonarDataList.remove(*it);
+
+		diffSonarDataList.clear();
+		lastSonarDataList = sonarDataList;
+		opticalDataList.clear();
 	}
 	else if (data.getName() == "IT")
 	{
@@ -77,6 +87,7 @@ void SonarsRoutine::stdOut(const DistSensorData & data)
 	{
 		sonarDataList.remove(data);
 		sonarDataList.push_back(data);
+		diffSonarDataList.push_back(data);
 	}
 	else if (data.getName() == "OP")
 	{
