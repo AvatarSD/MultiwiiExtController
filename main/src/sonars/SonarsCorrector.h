@@ -13,7 +13,7 @@
 #include "../service/pid/PID.h"
 #include "../service/timer/ThreadTimer.h"
 #include <list>
-#include <CGAL/Vector_3.h>
+//#include <CGAL/Vector_3.h>
 
 class SonarsCorrector
 {
