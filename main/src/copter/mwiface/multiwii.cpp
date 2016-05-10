@@ -258,6 +258,6 @@ void MultiWii::disconnectEvent(std::string err)
 
 void MultiWii::sendRequest(unsigned char requestCode)
 {
-	char buf[additinal_all_bytes] = {'$', 'M', '<', 0, requestCode, requestCode};
+	char buf[additinal_all_bytes] = {'$', 'M', '<', 0, (char)requestCode, (char)requestCode};
 	write(buf,sizeof(buf));
 }
