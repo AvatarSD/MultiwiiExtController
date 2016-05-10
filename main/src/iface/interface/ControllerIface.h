@@ -19,7 +19,7 @@ public:
 	virtual ~ControllerIface();
 
 
-	boost::signals2<void(ControlData&)> controlData;
+	boost::signals2::signal<void(ControlData&)> controlData;
 
 };
 
