@@ -1,3 +1,10 @@
+
+#Specify the cross compiler
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
+set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
+
+
 project(OpenFlyBaseStation)
 
 cmake_minimum_required(VERSION 3.1)
@@ -20,6 +27,8 @@ target_link_libraries(${PROJECT_NAME} pthread)
 
 #Add boost library and include dir
 set(BOOST_ROOT /home/sd/boost_1_60_0)
+set(BOOST_LIBRARYDIR ${BOOST_ROOT}/stage_arm/lib/)
+
 find_package( Boost REQUIRED COMPONENTS system thread )
 include_directories( ${Boost_INCLUDE_DIRS} )
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES})
