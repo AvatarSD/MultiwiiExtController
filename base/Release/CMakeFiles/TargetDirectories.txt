@@ -1,0 +1,3 @@
+/home/sd/git/OpenFly/base/Release/CMakeFiles/edit_cache.dir
+/home/sd/git/OpenFly/base/Release/CMakeFiles/rebuild_cache.dir
+/home/sd/git/OpenFly/base/Release/CMakeFiles/OpenFly.dir

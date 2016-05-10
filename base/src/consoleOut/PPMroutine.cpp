@@ -6,6 +6,7 @@
  */
 
 #include "PPMroutine.h"
+#include <iostream>
 
 PPMroutine::PPMroutine(PPM& iface) :
 		_iface(iface), _mode(MAIN)
