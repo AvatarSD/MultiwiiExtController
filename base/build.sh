@@ -26,8 +26,12 @@ else
 	fi
 	cd $conf
 	cmake -DCMAKE_BUILD_TYPE:STRING=$conf ../
-	make
-	cd ../
+	if [[ $args = "index" ]]; then
+                cat compile_commands.json
+        	echo
+	else
+		make $args
+	fi
 fi
 
 exit 0

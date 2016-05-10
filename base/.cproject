@@ -40,11 +40,7 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.592688985" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="cdt.managedbuild.tool.gnu.cpp.linker.base.500885143" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
-								<option id="gnu.cpp.link.option.libs.1611727774" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="boost_system"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="boost_thread"/>
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="pthread"/>
-								</option>
+								<option id="gnu.cpp.link.option.libs.1611727774" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.2044728608" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -55,8 +51,18 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.toolchain.gnu.base.1305165225.396318768" name="/" resourcePath="src">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.base.1819144599" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.base" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1325466423" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.876362237"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1111430973" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base.2085786787"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.base.1761961808" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.base.269032956"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.1047138049" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base.592688985"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.650245184" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base.500885143"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.base.1052226852" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.base.83243191"/>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 #Add build dir and turn on verbose gcc output
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
 set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #Add compiling file
 file(GLOB_RECURSE EXE_SRC src/*.cpp)
@@ -14,7 +15,6 @@ file(GLOB_RECURSE EXE_SRC src/*.cpp)
 add_executable(${PROJECT_NAME} ${EXE_SRC})
 
 #Add pthread library
-#find_package(Thread)
 target_link_libraries(${PROJECT_NAME} pthread)
 
 #Add boost library and include dir
