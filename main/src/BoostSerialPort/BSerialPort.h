@@ -8,7 +8,7 @@
 #ifndef BOOSTSERIALPORT_BSERIALPORT_H_
 #define BOOSTSERIALPORT_BSERIALPORT_H_
 
-#include "boost/asio.hpp"
+#include <boost/asio.hpp>
 #include <string>
 
 

@@ -1,13 +1,16 @@
-project(OpenFly)
+project(OpenFlyBaseStation)
 
 cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 11)
 
+#Add build dir and turn on verbose gcc output
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 #Add compiling file
 file(GLOB_RECURSE EXE_SRC src/*.cpp)
 
-#Add executeable file and build dir
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin/)
+#Main executable file
 add_executable(${PROJECT_NAME} ${EXE_SRC})
 
 #Add pthread library
