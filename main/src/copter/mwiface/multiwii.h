@@ -41,6 +41,7 @@ public:
 	boost::signals2::signal<void (std::string)> error;
 
 protected:
+	//todo need to reimplement with releize any custom cmd with use lenth informations
 	void sendRequest(unsigned char requestCode);
 
 private:
